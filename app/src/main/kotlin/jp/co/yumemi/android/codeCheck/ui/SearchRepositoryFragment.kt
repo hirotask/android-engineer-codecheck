@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.R
 import jp.co.yumemi.android.codeCheck.databinding.SearchRepositoryFragmentBinding
 import jp.co.yumemi.android.codeCheck.domain.Item
@@ -18,27 +20,24 @@ import jp.co.yumemi.android.codeCheck.domain.Item
 @AndroidEntryPoint
 class SearchRepositoryFragment : Fragment(R.layout.search_repository_fragment) {
 
+    val viewModel: SearchRepositoryViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = SearchRepositoryFragmentBinding.bind(view)
 
-        val viewModel = SearchRepositoryViewModel(requireContext())
-
         val layoutManager = LinearLayoutManager(requireContext())
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), layoutManager.orientation)
-        val adapter = CustomAdapter {
-            gotoDetailFragment(it)
-        }
+        val adapter = CustomAdapter { gotoDetailFragment(it) }
 
         binding.searchInputText
             .setOnEditorActionListener { editText, action, _ ->
                 if (action == EditorInfo.IME_ACTION_SEARCH) {
                     editText.text.toString().let {
-                        viewModel.searchResults(it).apply {
-                            adapter.submitList(this)
-                        }
+                        viewModel.searchResults(it)
+                        adapter.submitList(viewModel.itemState.value)
                     }
                     return@setOnEditorActionListener true
                 }

@@ -3,30 +3,30 @@
  */
 package jp.co.yumemi.android.codeCheck.ui
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
-import io.ktor.client.HttpClient
-import io.ktor.client.call.receive
-import io.ktor.client.engine.android.Android
-import io.ktor.client.request.get
-import io.ktor.client.request.header
-import io.ktor.client.request.parameter
-import io.ktor.client.statement.HttpResponse
-import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
-import org.json.JSONObject
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
+import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.R
+import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiService
+import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiRepository
 import jp.co.yumemi.android.codeCheck.domain.Item
+import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
+import jp.co.yumemi.android.codeCheck.util.StringResource
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 /**
  * TwoFragment で使う
  */
-class SearchRepositoryViewModel(
-    val context: Context
+@HiltViewModel
+class SearchRepositoryViewModel @Inject constructor(
+    private val gitHubApiRepository: GitHubApiRepository,
+    private val gitHubApiService: GitHubApiService
 ) : ViewModel() {
+
+    val itemState: StateFlow<List<Item>> get() = gitHubApiRepository.observe()
 
     /**
      * githubのapiに問い合わせ、検索対象語句に一致したリポジトリをListで返す
@@ -34,47 +34,16 @@ class SearchRepositoryViewModel(
      * @param inputText 検索対象語句
      * @return 検索結果
      */
-    fun searchResults(inputText: String): List<Item> = runBlocking {
-        val client = HttpClient(Android)
-
-        return@runBlocking GlobalScope.async {
-            val response: HttpResponse = client?.get("https://api.github.com/search/repositories") {
-                header("Accept", "application/vnd.github.v3+json")
-                parameter("q", inputText)
+    fun searchResults(inputText: String) {
+        viewModelScope.launch {
+            val list: List<Item> = gitHubApiService.getItems(inputText).map {
+                it.language = StringResource.create(R.string.written_language, it.rawLanguage)
+                it
             }
 
-            val jsonBody = JSONObject(response.receive<String>())
+            gitHubApiRepository.update(list)
+        }
 
-            val jsonItems = jsonBody.optJSONArray("items")!!
-
-            val items = mutableListOf<Item>()
-
-            for (i in 0 until jsonItems.length()) {
-                val jsonItem = jsonItems.optJSONObject(i)!!
-                val name = jsonItem.optString("full_name")
-                val ownerIconUrl = jsonItem.optJSONObject("owner")!!.optString("avatar_url")
-                val language = jsonItem.optString("language")
-                val stargazersCount = jsonItem.optLong("stargazers_count")
-                val watchersCount = jsonItem.optLong("watchers_count")
-                val forksCount = jsonItem.optLong("forks_conut")
-                val openIssuesCount = jsonItem.optLong("open_issues_count")
-
-                items.add(
-                    Item(
-                        name = name,
-                        ownerIconUrl = ownerIconUrl,
-                        language = context.getString(R.string.written_language, language),
-                        stargazersCount = stargazersCount,
-                        watchersCount = watchersCount,
-                        forksCount = forksCount,
-                        openIssuesCount = openIssuesCount
-                    )
-                )
-            }
-
-            lastSearchDate = Date()
-
-            return@async items.toList()
-        }.await()
+        lastSearchDate = Date()
     }
 }
