@@ -1,7 +1,7 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.codeCheck
+package jp.co.yumemi.android.codeCheck.ui
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
@@ -12,12 +12,14 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
-import jp.co.yumemi.android.codeCheck.TopActivity.Companion.lastSearchDate
+import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
 import java.util.Date
+import jp.co.yumemi.android.codeCheck.R
+import jp.co.yumemi.android.codeCheck.domain.Item
 
 /**
  * TwoFragment で使う
