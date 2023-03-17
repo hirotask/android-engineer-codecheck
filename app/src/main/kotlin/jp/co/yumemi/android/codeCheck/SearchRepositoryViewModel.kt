@@ -12,12 +12,12 @@ import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.statement.HttpResponse
-import java.util.Date
 import jp.co.yumemi.android.codeCheck.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.json.JSONObject
+import java.util.Date
 
 /**
  * TwoFragment で使う
@@ -76,5 +76,3 @@ class SearchRepositoryViewModel(
         }.await()
     }
 }
-
-
