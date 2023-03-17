@@ -16,16 +16,16 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import jp.co.yumemi.android.codeCheck.databinding.FragmentOneBinding
+import jp.co.yumemi.android.codeCheck.databinding.SearchRepositoryFragmentBinding
 
-class OneFragment : Fragment(R.layout.fragment_one) {
+class OneFragment : Fragment(R.layout.search_repository_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentOneBinding.bind(view)
+        val binding = SearchRepositoryFragmentBinding.bind(view)
 
-        val viewModel = OneViewModel(requireContext())
+        val viewModel = SearchRepositoryViewModel(requireContext())
 
         val layoutManager = LinearLayoutManager(requireContext())
         val dividerItemDecoration =
@@ -90,12 +90,12 @@ class CustomAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val _item = getItem(position)
+        val item = getItem(position)
         (holder.itemView.findViewById<View>(R.id.repositoryNameView) as TextView).text =
-            _item.name
+            item.name
 
         holder.itemView.setOnClickListener {
-            itemClickListener.itemClick(_item)
+            itemClickListener.itemClick(item)
         }
     }
 }

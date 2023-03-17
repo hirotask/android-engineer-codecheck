@@ -4,7 +4,6 @@
 package jp.co.yumemi.android.codeCheck
 
 import android.content.Context
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.call.receive
@@ -18,17 +17,21 @@ import jp.co.yumemi.android.codeCheck.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
 
 /**
  * TwoFragment で使う
  */
-class OneViewModel(
+class SearchRepositoryViewModel(
     val context: Context
 ) : ViewModel() {
 
-    // 検索結果
+    /**
+     * githubのapiに問い合わせ、検索対象語句に一致したリポジトリをListで返す
+     *
+     * @param inputText 検索対象語句
+     * @return 検索結果
+     */
     fun searchResults(inputText: String): List<Item> = runBlocking {
         val client = HttpClient(Android)
 
@@ -44,9 +47,6 @@ class OneViewModel(
 
             val items = mutableListOf<Item>()
 
-            /**
-             * アイテムの個数分ループする
-             */
             for (i in 0 until jsonItems.length()) {
                 val jsonItem = jsonItems.optJSONObject(i)!!
                 val name = jsonItem.optString("full_name")
@@ -77,13 +77,4 @@ class OneViewModel(
     }
 }
 
-@Parcelize
-data class Item(
-    val name: String,
-    val ownerIconUrl: String,
-    val language: String,
-    val stargazersCount: Long,
-    val watchersCount: Long,
-    val forksCount: Long,
-    val openIssuesCount: Long,
-) : Parcelable
+
