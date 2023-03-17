@@ -10,6 +10,9 @@ plugins {
 spotless {
     kotlin {
         target '**/*.kt'
+        targetExclude("$buildDir/**/*.kt")
+        targetExclude('bin/**/*.kt')
+
         ktlint('0.39.0')
     }
 }
