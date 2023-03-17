@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codeCheck.R
 import jp.co.yumemi.android.codeCheck.databinding.SearchRepositoryFragmentBinding
 import jp.co.yumemi.android.codeCheck.domain.Item
 
+@AndroidEntryPoint
 class SearchRepositoryFragment : Fragment(R.layout.search_repository_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

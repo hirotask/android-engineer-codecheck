@@ -9,10 +9,12 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import coil.load
+import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codeCheck.R
 import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
 import jp.co.yumemi.android.codeCheck.databinding.RepositoryDetailFragmentBinding
 
+@AndroidEntryPoint
 class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
 
     private val args: RepositoryDetailFragmentArgs by navArgs()

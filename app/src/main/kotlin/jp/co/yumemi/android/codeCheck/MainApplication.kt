@@ -1,4 +1,8 @@
 package jp.co.yumemi.android.codeCheck
 
-class MainApplication {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class MainApplication: Application() {
 }
