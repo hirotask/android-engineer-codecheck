@@ -4,6 +4,17 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.diffplug.spotless' version '5.7.0'
+}
+
+spotless {
+    kotlin {
+        target '**/*.kt'
+        targetExclude("$buildDir/**/*.kt")
+        targetExclude('bin/**/*.kt')
+
+        ktlint('0.39.0')
+    }
 }
 
 android {

@@ -1,33 +1,38 @@
 /*
  * Copyright © 2021 YUMEMI Inc. All rights reserved.
  */
-package jp.co.yumemi.android.code_check
+package jp.co.yumemi.android.codeCheck
 
 import android.content.Context
-import android.os.Parcelable
 import androidx.lifecycle.ViewModel
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.android.*
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import jp.co.yumemi.android.code_check.TopActivity.Companion.lastSearchDate
+import io.ktor.client.HttpClient
+import io.ktor.client.call.receive
+import io.ktor.client.engine.android.Android
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.client.request.parameter
+import io.ktor.client.statement.HttpResponse
+import jp.co.yumemi.android.codeCheck.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
-import kotlinx.parcelize.Parcelize
 import org.json.JSONObject
-import java.util.*
+import java.util.Date
 
 /**
  * TwoFragment で使う
  */
-class OneViewModel(
+class SearchRepositoryViewModel(
     val context: Context
 ) : ViewModel() {
 
-    // 検索結果
-    fun searchResults(inputText: String): List<item> = runBlocking {
+    /**
+     * githubのapiに問い合わせ、検索対象語句に一致したリポジトリをListで返す
+     *
+     * @param inputText 検索対象語句
+     * @return 検索結果
+     */
+    fun searchResults(inputText: String): List<Item> = runBlocking {
         val client = HttpClient(Android)
 
         return@runBlocking GlobalScope.async {
@@ -40,11 +45,8 @@ class OneViewModel(
 
             val jsonItems = jsonBody.optJSONArray("items")!!
 
-            val items = mutableListOf<item>()
+            val items = mutableListOf<Item>()
 
-            /**
-             * アイテムの個数分ループする
-             */
             for (i in 0 until jsonItems.length()) {
                 val jsonItem = jsonItems.optJSONObject(i)!!
                 val name = jsonItem.optString("full_name")
@@ -56,7 +58,7 @@ class OneViewModel(
                 val openIssuesCount = jsonItem.optLong("open_issues_count")
 
                 items.add(
-                    item(
+                    Item(
                         name = name,
                         ownerIconUrl = ownerIconUrl,
                         language = context.getString(R.string.written_language, language),
@@ -74,14 +76,3 @@ class OneViewModel(
         }.await()
     }
 }
-
-@Parcelize
-data class item(
-    val name: String,
-    val ownerIconUrl: String,
-    val language: String,
-    val stargazersCount: Long,
-    val watchersCount: Long,
-    val forksCount: Long,
-    val openIssuesCount: Long,
-) : Parcelable
