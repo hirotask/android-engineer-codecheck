@@ -3,7 +3,6 @@
  */
 package jp.co.yumemi.android.codeCheck.ui
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -22,7 +21,6 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
     private val viewModel: SearchRepositoryViewModel by viewModels()
 
 
-    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
