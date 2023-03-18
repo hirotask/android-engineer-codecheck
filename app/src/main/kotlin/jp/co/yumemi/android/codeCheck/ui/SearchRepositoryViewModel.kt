@@ -8,12 +8,10 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
 import javax.inject.Inject
-import jp.co.yumemi.android.codeCheck.R
 import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiService
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiRepository
 import jp.co.yumemi.android.codeCheck.domain.Item
 import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
-import jp.co.yumemi.android.codeCheck.util.StringResource
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
@@ -26,7 +24,7 @@ class SearchRepositoryViewModel @Inject constructor(
     private val gitHubApiService: GitHubApiService
 ) : ViewModel() {
 
-    val itemState: StateFlow<List<Item>> get() = gitHubApiRepository.observe()
+    val itemState: StateFlow<List<Item>> = gitHubApiRepository.observe()
 
     /**
      * githubのapiに問い合わせ、検索対象語句に一致したリポジトリをListで返す
@@ -36,14 +34,9 @@ class SearchRepositoryViewModel @Inject constructor(
      */
     fun searchResults(inputText: String) {
         viewModelScope.launch {
-            val list: List<Item> = gitHubApiService.getItems(inputText).map {
-                it.language = StringResource.create(R.string.written_language, it.rawLanguage)
-                it
-            }
-
+            lastSearchDate = Date()
+            val list: List<Item> = gitHubApiService.getItems(inputText)
             gitHubApiRepository.update(list)
         }
-
-        lastSearchDate = Date()
     }
 }

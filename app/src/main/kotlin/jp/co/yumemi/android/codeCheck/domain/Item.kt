@@ -1,8 +1,10 @@
 package jp.co.yumemi.android.codeCheck.domain
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
-import jp.co.yumemi.android.codeCheck.util.StringResource
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Item(
     @Json(name = "full_name") val name: String,
     @Json(name = "owner") val owner: Owner,
@@ -11,5 +13,4 @@ data class Item(
     @Json(name = "watchers_count") val watchersCount: Long,
     @Json(name = "forks_count") val forksCount: Long,
     @Json(name = "open_issues_count") val openIssuesCount: Long,
-    var language: StringResource,
-)
+): Parcelable

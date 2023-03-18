@@ -25,7 +25,7 @@ class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
         val response = service.getItems(searchText)
 
         if(response.isSuccessful) {
-            return service.getItems(searchText).body()
+            return response.body()
         }
 
         throw HttpException(response)

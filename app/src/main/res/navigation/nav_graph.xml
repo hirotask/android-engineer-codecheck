@@ -22,7 +22,7 @@
         tools:layout="@layout/repository_detail_fragment">
         <argument
             android:name="item"
-            app:argType="jp.co.yumemi.android.codeCheck.Item" />
+            app:argType="jp.co.yumemi.android.codeCheck.domain.Item" />
     </fragment>
 
 </navigation>
