@@ -26,18 +26,23 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val item = args.item
-        Timber.tag("item").d(item.toString())
+        val context = view.context
+
         Timber.tag("検索した日時").d(lastSearchDate.toString())
 
         binding = RepositoryDetailFragmentBinding.bind(view)
 
         viewBinding.ownerIconView.load(item.ownerIconUrl)
         viewBinding.nameView.text = item.name
-        viewBinding.languageView.text = item.rawLanguage
-        viewBinding.starsView.text = "${item.stargazersCount} stars"
-        viewBinding.watchersView.text = "${item.watchersCount} watchers"
-        viewBinding.forksView.text = "${item.forksCount} forks"
-        viewBinding.openIssuesView.text = "${item.openIssuesCount} open issues"
+        viewBinding.languageView.text =
+            context.getString(R.string.written_language, item.rawLanguage)
+        viewBinding.starsView.text = context.getString(R.string.star_count, item.stargazersCount)
+        viewBinding.watchersView.text =
+            context.getString(R.string.watcher_count, item.watchersCount)
+        viewBinding.forksView.text = context.getString(R.string.forks_count, item.forksCount)
+        viewBinding.openIssuesView.text =
+            context.getString(R.string.open_issue_count, item.openIssuesCount)
     }
 }
