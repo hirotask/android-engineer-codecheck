@@ -12,7 +12,7 @@ data class ItemJson(
     @Json(name = "language")
     val rawLanguage: String?,
     @Json(name = "stargazers_count")
-    val stargazersCount: Long ,
+    val stargazersCount: Long,
     @Json(name = "watchers_count")
     val watchersCount: Long,
     @Json(name = "forks_count")

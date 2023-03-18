@@ -32,9 +32,6 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
 
         binding = RepositoryDetailFragmentBinding.bind(view)
 
-
-
-
         viewBinding.ownerIconView.load(item.ownerIconUrl)
         viewBinding.nameView.text = item.name
         viewBinding.languageView.text = item.rawLanguage
@@ -43,5 +40,4 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
         viewBinding.forksView.text = "${item.forksCount} forks"
         viewBinding.openIssuesView.text = "${item.openIssuesCount} open issues"
     }
-
 }

@@ -1,11 +1,11 @@
 package jp.co.yumemi.android.codeCheck.data.apiservice
 
-import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.data.api.GitHubApi
 import jp.co.yumemi.android.codeCheck.domain.Item
 import jp.co.yumemi.android.codeCheck.domain.toItemList
 import retrofit2.HttpException
 import timber.log.Timber
+import javax.inject.Inject
 
 class GitHubApiServiceImpl @Inject constructor(
     private val gitHubApi: GitHubApi
@@ -24,5 +24,4 @@ class GitHubApiServiceImpl @Inject constructor(
 
         return emptyList()
     }
-
 }

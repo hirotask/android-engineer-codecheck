@@ -17,5 +17,4 @@ interface GitHubApiRepository {
      * 状態を引数のリストで更新する
      */
     suspend fun update(list: List<Item>)
-
 }

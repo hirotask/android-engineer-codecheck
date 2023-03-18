@@ -13,4 +13,3 @@ data class Item(
     val forksCount: Long = 0,
     val openIssuesCount: Long = 0,
 ) : Parcelable
-

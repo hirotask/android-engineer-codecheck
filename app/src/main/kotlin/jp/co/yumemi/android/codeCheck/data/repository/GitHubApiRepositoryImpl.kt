@@ -1,13 +1,12 @@
 package jp.co.yumemi.android.codeCheck.data.repository
 
-import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.domain.Item
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-
-class GitHubApiRepositoryImpl @Inject constructor(): GitHubApiRepository {
+class GitHubApiRepositoryImpl @Inject constructor() : GitHubApiRepository {
 
     private val mutableItemState = MutableStateFlow<List<Item>>(emptyList())
 
@@ -18,5 +17,4 @@ class GitHubApiRepositoryImpl @Inject constructor(): GitHubApiRepository {
     override suspend fun update(list: List<Item>) {
         mutableItemState.emit(list)
     }
-
 }

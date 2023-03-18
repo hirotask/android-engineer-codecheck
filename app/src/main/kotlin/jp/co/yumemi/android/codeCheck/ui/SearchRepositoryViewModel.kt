@@ -6,8 +6,6 @@ package jp.co.yumemi.android.codeCheck.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import java.util.Date
-import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiService
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiRepository
 import jp.co.yumemi.android.codeCheck.domain.Item
@@ -15,6 +13,8 @@ import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.Date
+import javax.inject.Inject
 
 /**
  * TwoFragment で使う
