@@ -7,18 +7,19 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codeCheck.R
 import jp.co.yumemi.android.codeCheck.databinding.RepositoryDetailFragmentBinding
-import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
 import timber.log.Timber
 
 @AndroidEntryPoint
 class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
 
     private val args: RepositoryDetailFragmentArgs by navArgs()
+    private val viewModel: SearchRepositoryViewModel by viewModels()
 
     lateinit var binding: RepositoryDetailFragmentBinding
     private val viewBinding get() = binding
@@ -30,7 +31,7 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
         val item = args.item
         val context = view.context
 
-        Timber.tag("検索した日時").d(lastSearchDate.toString())
+        Timber.tag("検索した日時").d(viewModel.lastSearchDate.value.toString())
 
         binding = RepositoryDetailFragmentBinding.bind(view)
 

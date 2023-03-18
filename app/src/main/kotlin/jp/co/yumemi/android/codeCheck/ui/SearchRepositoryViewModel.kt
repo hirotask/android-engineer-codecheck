@@ -9,11 +9,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiService
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiRepository
 import jp.co.yumemi.android.codeCheck.domain.Item
-import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class SearchRepositoryViewModel @Inject constructor(
@@ -21,6 +22,11 @@ class SearchRepositoryViewModel @Inject constructor(
     private val gitHubApiService: GitHubApiService
 ) : ViewModel() {
 
+    //最終検索日時
+    private val lastSearchDateMutable = MutableStateFlow(Date())
+    val lastSearchDate = lastSearchDateMutable.asStateFlow()
+
+    //GitRepositoryのリスト
     val itemState: StateFlow<List<Item>> = gitHubApiRepository.observe()
 
     /**
@@ -31,7 +37,7 @@ class SearchRepositoryViewModel @Inject constructor(
      */
     fun searchResults(inputText: String) {
         viewModelScope.launch {
-            lastSearchDate = Date()
+            lastSearchDateMutable.emit(Date())
             val list: List<Item> = gitHubApiService.getItems(inputText)
             gitHubApiRepository.update(list)
         }
