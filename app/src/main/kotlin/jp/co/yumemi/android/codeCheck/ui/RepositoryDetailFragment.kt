@@ -21,8 +21,6 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
     private val args: RepositoryDetailFragmentArgs by navArgs()
     private val viewModel: SearchRepositoryViewModel by viewModels()
 
-    lateinit var binding: RepositoryDetailFragmentBinding
-    private val viewBinding get() = binding
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,19 +29,19 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
         val item = args.item
         val context = view.context
 
+        val binding = RepositoryDetailFragmentBinding.bind(view)
+
         Timber.tag("検索した日時").d(viewModel.lastSearchDate.value.toString())
 
-        binding = RepositoryDetailFragmentBinding.bind(view)
-
-        viewBinding.ownerIconView.load(item.ownerIconUrl)
-        viewBinding.nameView.text = item.name
-        viewBinding.languageView.text =
+        binding.ownerIconView.load(item.ownerIconUrl)
+        binding.nameView.text = item.name
+        binding.languageView.text =
             context.getString(R.string.written_language, item.rawLanguage)
-        viewBinding.starsView.text = context.getString(R.string.star_count, item.stargazersCount)
-        viewBinding.watchersView.text =
+        binding.starsView.text = context.getString(R.string.star_count, item.stargazersCount)
+        binding.watchersView.text =
             context.getString(R.string.watcher_count, item.watchersCount)
-        viewBinding.forksView.text = context.getString(R.string.forks_count, item.forksCount)
-        viewBinding.openIssuesView.text =
+        binding.forksView.text = context.getString(R.string.forks_count, item.forksCount)
+        binding.openIssuesView.text =
             context.getString(R.string.open_issue_count, item.openIssuesCount)
     }
 }
