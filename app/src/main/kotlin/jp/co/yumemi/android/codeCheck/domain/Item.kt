@@ -1,16 +1,16 @@
 package jp.co.yumemi.android.codeCheck.domain
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Item(
-    @Json(name = "full_name") val name: String,
-    @Json(name = "owner") val owner: Owner,
-    @Json(name = "language") val rawLanguage: String,
-    @Json(name = "stargazers_count") val stargazersCount: Long,
-    @Json(name = "watchers_count") val watchersCount: Long,
-    @Json(name = "forks_count") val forksCount: Long,
-    @Json(name = "open_issues_count") val openIssuesCount: Long,
-): Parcelable
+    val name: String = "",
+    val ownerIconUrl: String,
+    val rawLanguage: String = "",
+    val stargazersCount: Long = 0,
+    val watchersCount: Long = 0,
+    val forksCount: Long = 0,
+    val openIssuesCount: Long = 0,
+) : Parcelable
+

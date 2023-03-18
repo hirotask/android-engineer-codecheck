@@ -26,15 +26,16 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val item = args.item
+        Timber.tag("item").d(item.toString())
         Timber.tag("検索した日時").d(lastSearchDate.toString())
 
         binding = RepositoryDetailFragmentBinding.bind(view)
 
-        val item = args.item
 
-        Timber.d(item.owner.avatarUrl)
-        viewBinding.ownerIconView.load(item.owner.avatarUrl)
+
+
+        viewBinding.ownerIconView.load(item.ownerIconUrl)
         viewBinding.nameView.text = item.name
         viewBinding.languageView.text = item.rawLanguage
         viewBinding.starsView.text = "${item.stargazersCount} stars"

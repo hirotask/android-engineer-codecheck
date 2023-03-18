@@ -21,10 +21,14 @@ val diff_util = object : DiffUtil.ItemCallback<Item>() {
 }
 
 class CustomAdapter(
-    private val itemClickAction: ItemClickAction,
+    private val itemClickAction: OnItemClickListener,
 ) : ListAdapter<Item, CustomAdapter.ViewHolder>(diff_util) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    interface OnItemClickListener {
+        fun itemClick(item: Item)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -38,9 +42,7 @@ class CustomAdapter(
             item.name
 
         holder.itemView.setOnClickListener {
-            itemClickAction(item)
+            itemClickAction.itemClick(item)
         }
     }
 }
-
-typealias ItemClickAction = (item: Item) -> Unit

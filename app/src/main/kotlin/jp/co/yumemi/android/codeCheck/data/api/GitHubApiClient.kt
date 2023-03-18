@@ -1,7 +1,7 @@
 package jp.co.yumemi.android.codeCheck.data.api
 
 import javax.inject.Inject
-import jp.co.yumemi.android.codeCheck.data.ItemResponse
+import jp.co.yumemi.android.codeCheck.domain.ItemJsonResponse
 import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -16,12 +16,12 @@ class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
         @GET("search/repositories")
         suspend fun getItems(
             @Query("q") q: String
-        ): Response<ItemResponse>
+        ): Response<ItemJsonResponse>
     }
 
     val service = retrofit.create(Service::class.java)
 
-    override suspend fun getGitHubItems(searchText: String): ItemResponse? {
+    override suspend fun getGitHubItems(searchText: String): ItemJsonResponse? {
         val response = service.getItems(searchText)
 
         if(response.isSuccessful) {
