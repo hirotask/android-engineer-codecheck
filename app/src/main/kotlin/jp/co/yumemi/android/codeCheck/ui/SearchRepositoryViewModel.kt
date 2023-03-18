@@ -16,9 +16,6 @@ import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
 
-/**
- * TwoFragment で使う
- */
 @HiltViewModel
 class SearchRepositoryViewModel @Inject constructor(
     private val gitHubApiRepository: GitHubApiRepository,

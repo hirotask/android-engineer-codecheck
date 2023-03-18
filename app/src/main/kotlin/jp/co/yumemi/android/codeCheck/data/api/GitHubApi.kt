@@ -7,7 +7,7 @@ import jp.co.yumemi.android.codeCheck.domain.ItemJsonResponse
  */
 interface GitHubApi {
     /**
-     *
+     * GitHubAPIと通信し、JSONのレスポンスを取得する
      *
      * @param
      * @return
