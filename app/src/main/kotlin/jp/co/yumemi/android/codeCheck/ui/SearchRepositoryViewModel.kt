@@ -12,7 +12,6 @@ import jp.co.yumemi.android.codeCheck.domain.Item
 import jp.co.yumemi.android.codeCheck.ui.TopActivity.Companion.lastSearchDate
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.Date
 import javax.inject.Inject
 
@@ -34,7 +33,6 @@ class SearchRepositoryViewModel @Inject constructor(
         viewModelScope.launch {
             lastSearchDate = Date()
             val list: List<Item> = gitHubApiService.getItems(inputText)
-            Timber.tag("response").d(list.toString())
             gitHubApiRepository.update(list)
         }
     }
