@@ -8,5 +8,4 @@ import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codeCheck.R
 
 @AndroidEntryPoint
-class TopActivity : AppCompatActivity(R.layout.activity_top) {
-}
+class TopActivity : AppCompatActivity(R.layout.activity_top)

@@ -20,7 +20,6 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
     private val args: RepositoryDetailFragmentArgs by navArgs()
     private val viewModel: SearchRepositoryViewModel by viewModels()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
