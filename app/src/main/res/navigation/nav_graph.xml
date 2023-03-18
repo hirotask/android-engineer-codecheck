@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/oneFragment">
+    app:startDestination="@id/searchRepositoryFragment">
 
     <fragment
-        android:id="@+id/oneFragment"
-        android:name="jp.co.yumemi.android.codeCheck.OneFragment"
+        android:id="@+id/searchRepositoryFragment"
+        android:name="jp.co.yumemi.android.codeCheck.ui.SearchRepositoryFragment"
         android:label="@string/app_name"
         tools:layout="@layout/search_repository_fragment">
         <action
-            android:id="@+id/action_repositoriesFragment_to_repositoryFragment"
-            app:destination="@id/twoFragment" />
+            android:id="@+id/action_repositoriesFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/twoFragment"
-        android:name="jp.co.yumemi.android.codeCheck.RepositoryDetailFragment"
+        android:id="@+id/detailFragment"
+        android:name="jp.co.yumemi.android.codeCheck.ui.RepositoryDetailFragment"
         android:label="@string/app_name"
         tools:layout="@layout/repository_detail_fragment">
         <argument
             android:name="item"
-            app:argType="jp.co.yumemi.android.codeCheck.Item" />
+            app:argType="jp.co.yumemi.android.codeCheck.domain.Item" />
     </fragment>
 
 </navigation>
