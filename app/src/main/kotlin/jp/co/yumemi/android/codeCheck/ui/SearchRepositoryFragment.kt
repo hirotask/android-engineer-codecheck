@@ -41,11 +41,11 @@ class SearchRepositoryFragment : Fragment(R.layout.search_repository_fragment) {
             .setOnEditorActionListener { editText, action, _ ->
                 if (action == EditorInfo.IME_ACTION_SEARCH) {
                     lifecycleScope.launch {
-                        editText.text.toString().let {
-                            viewModel.searchResults(it)
-                        }
-                        viewModel.itemState.collect {
-                            adapter.submitList(it)
+                        if (editText.text.isNotEmpty()) {
+                            viewModel.searchResults(editText.text.toString())
+                            viewModel.itemState.collect {
+                                adapter.submitList(it)
+                            }
                         }
                     }
                     return@setOnEditorActionListener true
