@@ -30,7 +30,9 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
 
         Timber.tag("検索した日時").d(viewModel.lastSearchDate.value.toString())
 
-        binding.ownerIconView.load(item.ownerIconUrl)
+        binding.ownerIconView.load(item.ownerIconUrl) {
+            R.drawable.jetbrains
+        }
         binding.nameView.text = item.name
         binding.languageView.text =
             context.getString(R.string.written_language, item.rawLanguage)
