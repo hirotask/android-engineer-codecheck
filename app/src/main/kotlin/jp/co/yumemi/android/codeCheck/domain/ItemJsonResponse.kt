@@ -23,7 +23,7 @@ data class ItemJson(
 
 data class Owner(
     @Json(name = "avatar_url")
-    val avatarUrl: String
+    val avatarUrl: String?
 )
 
 fun List<ItemJson>.toItemList(): List<Item> {
@@ -33,7 +33,7 @@ fun List<ItemJson>.toItemList(): List<Item> {
         mutableList.add(
             Item(
                 name = it.name,
-                ownerIconUrl = it.owner.avatarUrl,
+                ownerIconUrl = it.owner.avatarUrl ?: "",
                 rawLanguage = it.rawLanguage ?: "",
                 stargazersCount = it.stargazersCount,
                 watchersCount = it.watchersCount,
