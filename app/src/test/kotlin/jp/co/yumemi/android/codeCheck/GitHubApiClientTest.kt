@@ -13,6 +13,9 @@ import org.junit.Test
 
 class GitHubApiClientTest {
 
+    /**
+     * GitHubRepositoryを検索語"AAA"で検索できるかテスト
+     */
     @Test
     fun get_GitHubRepository_WhenAAA() {
         val testString = "AAA"
