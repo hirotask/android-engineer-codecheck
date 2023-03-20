@@ -1,8 +1,8 @@
-name: build-unitTest
+name: build-unitTest-uiTest
 on: [pull_request]
 jobs:
   kotlin:
-    name: build / unitTest
+    name: build / unitTest / uiTest
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
