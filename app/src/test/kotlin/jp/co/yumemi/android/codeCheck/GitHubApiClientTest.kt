@@ -1,9 +1,9 @@
 package jp.co.yumemi.android.codeCheck
 
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.confirmVerified
-import io.mockk.every
 import io.mockk.mockk
-import io.mockk.verify
 import jp.co.yumemi.android.codeCheck.data.api.GitHubApiClient
 import jp.co.yumemi.android.codeCheck.domain.ItemJson
 import jp.co.yumemi.android.codeCheck.domain.ItemJsonResponse
@@ -26,21 +26,13 @@ class GitHubApiClientTest {
             )
         )
 
-        every {
-            runBlocking {
-                api.getGitHubItems(testString)
-            }
-        } returns itemResponse
+        coEvery { api.getGitHubItems(testString) } returns itemResponse
 
         runBlocking {
             api.getGitHubItems(testString)
         }
 
-        verify {
-            runBlocking {
-                api.getGitHubItems(testString)
-            }
-        }
+        coVerify { api.getGitHubItems(testString) }
 
         confirmVerified(api)
     }
