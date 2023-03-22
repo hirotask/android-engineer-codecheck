@@ -8,8 +8,8 @@ import jp.co.yumemi.android.codeCheck.data.api.GitHubApi
 import jp.co.yumemi.android.codeCheck.data.api.GitHubApiClient
 import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiService
 import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiServiceImpl
-import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiRepository
-import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiRepositoryImpl
+import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiItemRepository
+import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiItemRepositoryImpl
 import javax.inject.Singleton
 
 @Module
@@ -26,5 +26,5 @@ interface BindModule {
 
     @Binds
     @Singleton
-    fun bindsGitHubApiRepository(impl: GitHubApiRepositoryImpl): GitHubApiRepository
+    fun bindsGitHubApiRepository(impl: GitHubApiItemRepositoryImpl): GitHubApiItemRepository
 }

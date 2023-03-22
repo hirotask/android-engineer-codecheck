@@ -4,9 +4,9 @@ import jp.co.yumemi.android.codeCheck.domain.Item
 import kotlinx.coroutines.flow.StateFlow
 
 /**
- * GitHubAPIで得られたデータを永続化する
+ * GitHubAPIで得られたItemを永続化する
  */
-interface GitHubApiRepository {
+interface GitHubApiItemRepository {
 
     /**
      * 状態を監視する

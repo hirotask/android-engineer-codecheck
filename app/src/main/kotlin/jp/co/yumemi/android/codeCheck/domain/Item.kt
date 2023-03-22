@@ -5,7 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Item(
-    val name: String = "",
+    val fullName: String = "",
+    val name: String,
+    val owner: String,
     val ownerIconUrl: String,
     val rawLanguage: String = "",
     val stargazersCount: Long = 0,

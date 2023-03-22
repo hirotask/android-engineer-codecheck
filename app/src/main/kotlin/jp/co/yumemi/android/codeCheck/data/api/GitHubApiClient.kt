@@ -20,7 +20,7 @@ class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
             @Query("q") q: String
         ): Response<ItemJsonResponse>
 
-        @GET("/repos/{user_name}/{repo_name}/stargazers")
+        @GET("repos/{user_name}/{repo_name}/stargazers")
         suspend fun getStargazers(
             @Path("user_name") userName: String,
             @Path("repo_name") repoName: String
