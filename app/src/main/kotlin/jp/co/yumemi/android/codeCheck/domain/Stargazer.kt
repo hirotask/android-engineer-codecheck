@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class IssueUser(
+data class Stargazer(
     val avatarUrl: String,
     val url: String,
     val userName: String

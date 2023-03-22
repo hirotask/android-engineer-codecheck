@@ -8,7 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
 import javax.inject.Inject
-import jp.co.yumemi.android.codeCheck.domain.IssueResponseList
+import jp.co.yumemi.android.codeCheck.domain.StargazersResponseList
 import retrofit2.http.Path
 
 class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
@@ -24,7 +24,7 @@ class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
         suspend fun getStargazers(
             @Path("user_name") userName: String,
             @Path("repo_name") repoName: String
-        ): Response<IssueResponseList>
+        ): Response<StargazersResponseList>
     }
 
     val service = retrofit.create(Service::class.java)
@@ -39,7 +39,7 @@ class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
         throw HttpException(response)
     }
 
-    override suspend fun getStargazers(userName: String, repoName: String): IssueResponseList? {
+    override suspend fun getStargazers(userName: String, repoName: String): StargazersResponseList? {
         val response = service.getStargazers(userName, repoName)
 
         if (response.isSuccessful) {

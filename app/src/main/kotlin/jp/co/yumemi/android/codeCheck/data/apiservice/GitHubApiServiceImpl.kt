@@ -6,6 +6,8 @@ import jp.co.yumemi.android.codeCheck.domain.toItemList
 import retrofit2.HttpException
 import timber.log.Timber
 import javax.inject.Inject
+import jp.co.yumemi.android.codeCheck.domain.Stargazer
+import jp.co.yumemi.android.codeCheck.domain.toStargazers
 
 class GitHubApiServiceImpl @Inject constructor(
     private val gitHubApi: GitHubApi
@@ -17,6 +19,20 @@ class GitHubApiServiceImpl @Inject constructor(
 
             if (response != null) {
                 return response.items.toItemList()
+            }
+        } catch (e: HttpException) {
+            Timber.tag("Http Error").d(e.message())
+        }
+
+        return emptyList()
+    }
+
+    override suspend fun getStargazers(userName: String, repoName: String): List<Stargazer> {
+        try {
+            val response = gitHubApi.getStargazers(userName, repoName)
+
+            if(response != null) {
+                return response.list.toStargazers()
             }
         } catch (e: HttpException) {
             Timber.tag("Http Error").d(e.message())
