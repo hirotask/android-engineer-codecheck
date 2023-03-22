@@ -1,10 +1,10 @@
 package jp.co.yumemi.android.codeCheck.data.repository
 
-import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.domain.Stargazer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 class GitHubApiStargazersRepositoryImpl @Inject constructor() : GitHubApiStargazersRepository {
 

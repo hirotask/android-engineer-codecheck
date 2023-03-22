@@ -52,5 +52,4 @@ class StargazersFragment : Fragment(R.layout.only_recyclerview) {
         val action = StargazersFragmentDirections.actionStargazersFragmentToWebViewFragment(url)
         findNavController().navigate(action)
     }
-
 }

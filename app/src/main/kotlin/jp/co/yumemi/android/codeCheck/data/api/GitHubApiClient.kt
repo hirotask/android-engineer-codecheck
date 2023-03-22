@@ -1,6 +1,5 @@
 package jp.co.yumemi.android.codeCheck.data.api
 
-import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.domain.ItemJsonResponse
 import jp.co.yumemi.android.codeCheck.domain.StargazersResponse
 import retrofit2.HttpException
@@ -10,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
+import javax.inject.Inject
 
 class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
 

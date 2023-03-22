@@ -8,4 +8,4 @@ data class Stargazer(
     val avatarUrl: String,
     val url: String,
     val userName: String
-): Parcelable
+) : Parcelable

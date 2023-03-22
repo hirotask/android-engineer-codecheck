@@ -24,7 +24,8 @@ class GitHubApiClientTest {
             listOf(
                 ItemJson(
                     "test",
-                    Owner("test"),
+                    "test",
+                    Owner("test", "test"),
                     "test",
                     0,
                     0,
@@ -32,7 +33,8 @@ class GitHubApiClientTest {
                     0,
                     "test",
                     "test",
-                    "test")
+                    "test"
+                )
             )
         )
 

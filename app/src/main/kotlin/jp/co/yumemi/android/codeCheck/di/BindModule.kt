@@ -10,9 +10,9 @@ import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiService
 import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiServiceImpl
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiItemRepository
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiItemRepositoryImpl
-import javax.inject.Singleton
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiStargazersRepository
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiStargazersRepositoryImpl
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
