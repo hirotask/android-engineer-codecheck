@@ -12,4 +12,7 @@ data class Item(
     val watchersCount: Long = 0,
     val forksCount: Long = 0,
     val openIssuesCount: Long = 0,
+    val stargazersUrl: String,
+    val forksUrl: String,
+    val issueUrl: String
 ) : Parcelable
