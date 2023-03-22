@@ -13,6 +13,7 @@ import coil.load
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.yumemi.android.codeCheck.R
 import jp.co.yumemi.android.codeCheck.databinding.RepositoryDetailFragmentBinding
+import jp.co.yumemi.android.codeCheck.domain.Item
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -34,14 +35,14 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
         binding.ownerIconView.load(item.ownerIconUrl) {
             R.drawable.jetbrains
         }
-        binding.nameView.text = item.name
+        binding.nameView.text = item.fullName
         binding.languageView.text =
             context.getString(R.string.written_language, item.rawLanguage)
 
         binding.starsButton.apply {
             text = context.getString(R.string.star_count, item.stargazersCount)
             setOnClickListener {
-                gotoWebViewFragment(item.stargazersUrl)
+                gotoStargazersFragment(item)
             }
         }
         binding.watchersButton.apply {
@@ -49,20 +50,14 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
         }
         binding.forksButton.apply {
             text = context.getString(R.string.forks_count, item.forksCount)
-            setOnClickListener {
-                gotoWebViewFragment(item.forksUrl)
-            }
         }
         binding.openIssueButton.apply {
             text = context.getString(R.string.open_issue_count, item.openIssuesCount)
-            setOnClickListener {
-                gotoWebViewFragment(item.issueUrl)
-            }
         }
     }
 
-    private fun gotoWebViewFragment(url: String) {
-        val action = RepositoryDetailFragmentDirections.actionDetailFragmentToWebviewFragment(url)
+    private fun gotoStargazersFragment(item: Item) {
+        val action = RepositoryDetailFragmentDirections.actionDetailFragmentToStargazersFragment(item.owner, item.name)
         findNavController().navigate(action)
     }
 }

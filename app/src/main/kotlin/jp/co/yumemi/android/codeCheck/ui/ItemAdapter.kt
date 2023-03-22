@@ -22,9 +22,9 @@ val diff_util = object : DiffUtil.ItemCallback<Item>() {
     }
 }
 
-class CustomAdapter(
+class ItemAdapter(
     private val itemClickAction: OnItemClickListener,
-) : ListAdapter<Item, CustomAdapter.ViewHolder>(diff_util) {
+) : ListAdapter<Item, ItemAdapter.ViewHolder>(diff_util) {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
