@@ -11,6 +11,8 @@ import jp.co.yumemi.android.codeCheck.data.apiservice.GitHubApiServiceImpl
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiItemRepository
 import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiItemRepositoryImpl
 import javax.inject.Singleton
+import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiStargazersRepository
+import jp.co.yumemi.android.codeCheck.data.repository.GitHubApiStargazersRepositoryImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -27,4 +29,8 @@ interface BindModule {
     @Binds
     @Singleton
     fun bindsGitHubApiRepository(impl: GitHubApiItemRepositoryImpl): GitHubApiItemRepository
+
+    @Binds
+    @Singleton
+    fun bindsGitHubApiStargazersRepository(impl: GitHubApiStargazersRepositoryImpl): GitHubApiStargazersRepository
 }

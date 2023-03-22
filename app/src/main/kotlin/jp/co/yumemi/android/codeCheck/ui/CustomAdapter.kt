@@ -14,7 +14,7 @@ import jp.co.yumemi.android.codeCheck.domain.Item
 
 val diff_util = object : DiffUtil.ItemCallback<Item>() {
     override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.fullName == newItem.fullName
     }
 
     override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
@@ -45,7 +45,7 @@ class CustomAdapter(
         }
 
         (holder.itemView.findViewById<TextView>(R.id.repository_text)).text =
-            item.name
+            item.fullName
 
         holder.itemView.setOnClickListener {
             itemClickAction.itemClick(item)
