@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import coil.load
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,11 +37,32 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
         binding.nameView.text = item.name
         binding.languageView.text =
             context.getString(R.string.written_language, item.rawLanguage)
-        binding.starsButton.text = context.getString(R.string.star_count, item.stargazersCount)
-        binding.watchersButton.text =
-            context.getString(R.string.watcher_count, item.watchersCount)
-        binding.forksButton.text = context.getString(R.string.forks_count, item.forksCount)
-        binding.openIssueButton.text =
-            context.getString(R.string.open_issue_count, item.openIssuesCount)
+
+        binding.starsButton.apply {
+            text = context.getString(R.string.star_count, item.stargazersCount)
+            setOnClickListener {
+                gotoWebViewFragment(item.stargazersUrl)
+            }
+        }
+        binding.watchersButton.apply {
+            text = context.getString(R.string.watcher_count, item.watchersCount)
+        }
+        binding.forksButton.apply {
+            text = context.getString(R.string.forks_count, item.forksCount)
+            setOnClickListener {
+                gotoWebViewFragment(item.forksUrl)
+            }
+        }
+        binding.openIssueButton.apply {
+            text = context.getString(R.string.open_issue_count, item.openIssuesCount)
+            setOnClickListener {
+                gotoWebViewFragment(item.issueUrl)
+            }
+        }
+    }
+
+    private fun gotoWebViewFragment(url: String) {
+        val action = RepositoryDetailFragmentDirections.actionDetailFragmentToWebviewFragment(url)
+        findNavController().navigate(action)
     }
 }
