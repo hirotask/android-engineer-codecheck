@@ -23,6 +23,35 @@
         <argument
             android:name="item"
             app:argType="jp.co.yumemi.android.codeCheck.domain.Item" />
+        <action
+            android:id="@+id/action_detailFragment_to_stargazersFragment"
+            app:destination="@id/stargazersFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/stargazersFragment"
+        android:name="jp.co.yumemi.android.codeCheck.ui.StargazersFragment"
+        android:label="@string/stargazers"
+        tools:layout="@layout/only_recyclerview">
+        <argument
+            android:name="userName"
+            app:argType="string" />
+        <argument
+            android:name="repoName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_stargazersFragment_to_webViewFragment"
+            app:destination="@id/webviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/webviewFragment"
+        android:name="jp.co.yumemi.android.codeCheck.ui.WebViewFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/webview_fragment">
+        <argument
+            android:name="url"
+            app:argType="string" />
     </fragment>
 
 </navigation>

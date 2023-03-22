@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-class GitHubApiRepositoryImpl @Inject constructor() : GitHubApiRepository {
+class GitHubApiItemRepositoryImpl @Inject constructor() : GitHubApiItemRepository {
 
     private val mutableItemState = MutableStateFlow<List<Item>>(emptyList())
 

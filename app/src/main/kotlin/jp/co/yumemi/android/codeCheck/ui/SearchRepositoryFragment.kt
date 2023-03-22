@@ -32,7 +32,7 @@ class SearchRepositoryFragment : Fragment(R.layout.search_repository_fragment) {
         val layoutManager = GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
         val dividerItemDecoration =
             DividerItemDecoration(requireContext(), layoutManager.orientation)
-        val adapter = CustomAdapter(object : CustomAdapter.OnItemClickListener {
+        val adapter = ItemAdapter(object : ItemAdapter.OnItemClickListener {
             override fun itemClick(item: Item) {
                 gotoDetailFragment(item)
             }

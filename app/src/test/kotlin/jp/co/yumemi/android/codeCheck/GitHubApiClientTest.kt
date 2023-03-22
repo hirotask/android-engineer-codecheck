@@ -22,7 +22,19 @@ class GitHubApiClientTest {
         val api = mockk<GitHubApiClient>()
         val itemResponse = ItemJsonResponse(
             listOf(
-                ItemJson("test", Owner("test"), "test", 0, 0, 0, 0)
+                ItemJson(
+                    "test",
+                    "test",
+                    Owner("test", "test"),
+                    "test",
+                    0,
+                    0,
+                    0,
+                    0,
+                    "test",
+                    "test",
+                    "test"
+                )
             )
         )
 
