@@ -3,10 +3,12 @@ package jp.co.yumemi.android.codeCheck.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import jp.co.yumemi.android.codeCheck.R
 import jp.co.yumemi.android.codeCheck.domain.Item
 
@@ -38,7 +40,11 @@ class CustomAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        (holder.itemView.findViewById<TextView>(R.id.repositoryNameView)).text =
+        (holder.itemView.findViewById<ImageView>(R.id.repository_image)).load(item.ownerIconUrl) {
+            R.drawable.jetbrains
+        }
+
+        (holder.itemView.findViewById<TextView>(R.id.repository_text)).text =
             item.name
 
         holder.itemView.setOnClickListener {
