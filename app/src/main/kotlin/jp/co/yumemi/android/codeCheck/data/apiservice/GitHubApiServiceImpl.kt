@@ -32,7 +32,7 @@ class GitHubApiServiceImpl @Inject constructor(
             val response = gitHubApi.getStargazers(userName, repoName)
 
             if(response != null) {
-                return response.list.toStargazers()
+                return response.toStargazers()
             }
         } catch (e: HttpException) {
             Timber.tag("Http Error").d(e.message())

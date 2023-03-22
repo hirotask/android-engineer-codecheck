@@ -1,15 +1,15 @@
 package jp.co.yumemi.android.codeCheck.data.api
 
+import javax.inject.Inject
 import jp.co.yumemi.android.codeCheck.domain.ItemJsonResponse
+import jp.co.yumemi.android.codeCheck.domain.StargazersResponse
 import retrofit2.HttpException
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Headers
-import retrofit2.http.Query
-import javax.inject.Inject
-import jp.co.yumemi.android.codeCheck.domain.StargazersResponseList
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
 
@@ -24,7 +24,7 @@ class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
         suspend fun getStargazers(
             @Path("user_name") userName: String,
             @Path("repo_name") repoName: String
-        ): Response<StargazersResponseList>
+        ): Response<Array<StargazersResponse>>
     }
 
     val service = retrofit.create(Service::class.java)
@@ -39,7 +39,7 @@ class GitHubApiClient @Inject constructor(retrofit: Retrofit) : GitHubApi {
         throw HttpException(response)
     }
 
-    override suspend fun getStargazers(userName: String, repoName: String): StargazersResponseList? {
+    override suspend fun getStargazers(userName: String, repoName: String): Array<StargazersResponse>? {
         val response = service.getStargazers(userName, repoName)
 
         if (response.isSuccessful) {
