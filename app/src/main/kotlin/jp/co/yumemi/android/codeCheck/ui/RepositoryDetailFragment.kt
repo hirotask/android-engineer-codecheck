@@ -36,11 +36,11 @@ class RepositoryDetailFragment : Fragment(R.layout.repository_detail_fragment) {
         binding.nameView.text = item.name
         binding.languageView.text =
             context.getString(R.string.written_language, item.rawLanguage)
-        binding.starsView.text = context.getString(R.string.star_count, item.stargazersCount)
-        binding.watchersView.text =
+        binding.starsButton.text = context.getString(R.string.star_count, item.stargazersCount)
+        binding.watchersButton.text =
             context.getString(R.string.watcher_count, item.watchersCount)
-        binding.forksView.text = context.getString(R.string.forks_count, item.forksCount)
-        binding.openIssuesView.text =
+        binding.forksButton.text = context.getString(R.string.forks_count, item.forksCount)
+        binding.openIssueButton.text =
             context.getString(R.string.open_issue_count, item.openIssuesCount)
     }
 }
